@@ -4,6 +4,7 @@ import { encodeBarcode } from "./tools/encode.js";
 import { encodeQrTerminal } from "./tools/asciiQr.js";
 import { decodeBarcode } from "./tools/decode.js";
 import { listSymbologies } from "./tools/symbologies.js";
+import { listSymbologyOptions } from "./tools/symbologyOptions.js";
 
 export const SERVER_NAME = "barcoding-mcp";
 export const SERVER_VERSION = "0.0.1";
@@ -114,6 +115,38 @@ export function createServer(): McpServer {
         { type: "text", text: JSON.stringify(listSymbologies(), null, 2) },
       ],
     }),
+  );
+
+  // --- list_symbology_options: discovery for the encode option surface -----
+  server.registerTool(
+    "list_symbology_options",
+    {
+      title: "List symbology options",
+      description:
+        "Given a bcid, return the valid encode options segmented into: " +
+        "`specific` (unique to this symbology, e.g. QR eclevel/version/mask), " +
+        "`common` (layout/render options honored by all), and `sizing` " +
+        "(advanced physical sizing). Call before encode_barcode to discover " +
+        "which keys the freeform `options` bag accepts. Catalog generated from " +
+        "bwip-js's own sources.",
+      inputSchema: {
+        bcid: z.string().describe('Symbology id, e.g. "qrcode", "pdf417".'),
+      },
+    },
+    async ({ bcid }) => {
+      const result = await listSymbologyOptions(bcid);
+      if (!result) {
+        return {
+          content: [
+            { type: "text", text: `Unknown bcid: ${bcid}. Use list_symbologies.` },
+          ],
+          isError: true,
+        };
+      }
+      return {
+        content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+      };
+    },
   );
 
   return server;

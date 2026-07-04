@@ -92,11 +92,20 @@ Shape = **hybrid**, not pure-freeform:
    every option" into "an agent can actually drive every option." Without it the
    long tail is dead weight.
 
-**Open task (confirm in spike):** bwip-js has no clean programmatic "list options
-for this bcid" API — the metadata lives in BWIPP's per-symbology reference. So
-`list_symbology_options` likely means shipping a **generated option catalog**
-(transcribe the BWIPP reference once into a JSON table the tool serves). Decide
-early: one-line passthrough vs a data-authoring task.
+**RESOLVED — catalog generated from bwip-js's own sources (no passthrough, no
+web scraping).** `scripts/gen-options.mjs` mines two shipped files:
+- **Tier A (common, 53 opts):** parsed from `dist/bwip-js-gen.d.ts`
+  (`BwippOptions` + `RenderOptions`) — the render/layout options honored by all.
+- **Tier B (symbology-specific, 415 opts across 92/111 symbologies):** parsed
+  from `barcode.ps`, whose BWIPP option-default preamble (`/name default def`
+  with inline `%` descriptions) is regular and machine-readable.
+- **Sizing (10 opts):** BWIPP's Advanced Sizing Technology family, templated
+  into every symbology, hoisted into one shared group instead of repeating 92x.
+
+Output committed to `src/data/symbology-options.json`, copied into `dist` at
+build, served by `list_symbology_options`. Regenerate on bwip-js bump with
+`npm run gen:options`. Confirms the schema thesis: symbology-specific options are
+**not** typed by bwip-js, so the freeform `options` bag is the only channel.
 
 ## 5. Phases
 
@@ -117,9 +126,10 @@ early: one-line passthrough vs a data-authoring task.
 - `--http` flag, `StreamableHTTPServerTransport`, minimal listener, `--port`.
 - Verify identical tool behavior across both transports.
 
-### Phase 3 — Option discoverability
-- Build/ship the BWIPP option catalog.
-- `list_symbology_options(bcid)`.
+### Phase 3 — Option discoverability [DONE]
+- ~~Build/ship the BWIPP option catalog.~~ `scripts/gen-options.mjs` →
+  `src/data/symbology-options.json` (53 common, 10 sizing, 415 specific).
+- ~~`list_symbology_options(bcid)`.~~ Shipped, segments specific/common/sizing.
 
 ### Phase 4 — Self-verify + polish
 - `verify_barcode` round-trip (overlap set only).

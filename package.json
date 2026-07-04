@@ -14,7 +14,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "tsc",
+    "gen:options": "node scripts/gen-options.mjs",
+    "build": "tsc && node scripts/copy-data.mjs",
     "start": "node dist/index.js",
     "start:http": "node dist/index.js --http",
     "dev": "tsx src/index.ts",

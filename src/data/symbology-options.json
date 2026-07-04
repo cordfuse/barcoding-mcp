@@ -1,0 +1,2627 @@
+{
+  "generatedFrom": {
+    "bwipjs": "4.11.2"
+  },
+  "bcids": [
+    "auspost",
+    "azteccode",
+    "azteccodecompact",
+    "aztecrune",
+    "bc412",
+    "channelcode",
+    "codablockf",
+    "code11",
+    "code128",
+    "code16k",
+    "code2of5",
+    "code32",
+    "code39",
+    "code39ext",
+    "code49",
+    "code93",
+    "code93ext",
+    "codeone",
+    "coop2of5",
+    "d3aqr",
+    "daft",
+    "databarexpanded",
+    "databarexpandedcomposite",
+    "databarexpandedstacked",
+    "databarexpandedstackedcomposite",
+    "databarlimited",
+    "databarlimitedcomposite",
+    "databaromni",
+    "databaromnicomposite",
+    "databarstacked",
+    "databarstackedcomposite",
+    "databarstackedomni",
+    "databarstackedomnicomposite",
+    "databartruncated",
+    "databartruncatedcomposite",
+    "datalogic2of5",
+    "datamatrix",
+    "datamatrixrectangular",
+    "datamatrixrectangularextension",
+    "dotcode",
+    "ean13",
+    "ean13composite",
+    "ean14",
+    "ean2",
+    "ean5",
+    "ean8",
+    "ean8composite",
+    "flattermarken",
+    "gs1_128",
+    "gs1_128composite",
+    "gs1_cc",
+    "gs1datamatrix",
+    "gs1datamatrixrectangular",
+    "gs1dldatamatrix",
+    "gs1dlqrcode",
+    "gs1dotcode",
+    "gs1northamericancoupon",
+    "gs1qrcode",
+    "hanxin",
+    "hibcazteccode",
+    "hibccodablockf",
+    "hibccode128",
+    "hibccode39",
+    "hibcdatamatrix",
+    "hibcdatamatrixrectangular",
+    "hibcmicropdf417",
+    "hibcpdf417",
+    "hibcqrcode",
+    "iata2of5",
+    "identcode",
+    "industrial2of5",
+    "interleaved2of5",
+    "isbn",
+    "ismn",
+    "issn",
+    "itf14",
+    "japanpost",
+    "kix",
+    "leitcode",
+    "mailmark",
+    "mands",
+    "matrix2of5",
+    "maxicode",
+    "micropdf417",
+    "microqrcode",
+    "msi",
+    "onecode",
+    "pdf417",
+    "pdf417compact",
+    "pharmacode",
+    "pharmacode2",
+    "planet",
+    "plessey",
+    "posicode",
+    "postnet",
+    "pzn",
+    "qrcode",
+    "rationalizedCodabar",
+    "raw",
+    "rectangularmicroqrcode",
+    "royalmail",
+    "sscc18",
+    "swissqrcode",
+    "symbol",
+    "telepen",
+    "telepennumeric",
+    "ultracode",
+    "upca",
+    "upcacomposite",
+    "upce",
+    "upcecomposite"
+  ],
+  "commonOptions": [
+    {
+      "name": "includecheck",
+      "type": "boolean"
+    },
+    {
+      "name": "includecheckintext",
+      "type": "boolean"
+    },
+    {
+      "name": "parse",
+      "type": "boolean"
+    },
+    {
+      "name": "parsefnc",
+      "type": "boolean"
+    },
+    {
+      "name": "height",
+      "type": "number"
+    },
+    {
+      "name": "width",
+      "type": "number"
+    },
+    {
+      "name": "inkspread",
+      "type": "number"
+    },
+    {
+      "name": "inkspreadh",
+      "type": "number"
+    },
+    {
+      "name": "inkspreadv",
+      "type": "number"
+    },
+    {
+      "name": "dotty",
+      "type": "boolean"
+    },
+    {
+      "name": "binarytext",
+      "type": "boolean",
+      "description": "really a bwip-js option but better positioned here"
+    },
+    {
+      "name": "includetext",
+      "type": "boolean"
+    },
+    {
+      "name": "textfont",
+      "type": "string"
+    },
+    {
+      "name": "textsize",
+      "type": "number"
+    },
+    {
+      "name": "textgaps",
+      "type": "number"
+    },
+    {
+      "name": "alttext",
+      "type": "string"
+    },
+    {
+      "name": "textxalign",
+      "type": "enum",
+      "values": [
+        "offleft",
+        "left",
+        "center",
+        "right",
+        "offright",
+        "justify"
+      ]
+    },
+    {
+      "name": "textyalign",
+      "type": "enum",
+      "values": [
+        "below",
+        "center",
+        "above"
+      ]
+    },
+    {
+      "name": "textxoffset",
+      "type": "number"
+    },
+    {
+      "name": "textyoffset",
+      "type": "number"
+    },
+    {
+      "name": "showborder",
+      "type": "boolean"
+    },
+    {
+      "name": "borderwidth",
+      "type": "number"
+    },
+    {
+      "name": "borderleft",
+      "type": "number"
+    },
+    {
+      "name": "borderright",
+      "type": "number"
+    },
+    {
+      "name": "bordertop",
+      "type": "number"
+    },
+    {
+      "name": "borderbottom",
+      "type": "number"
+    },
+    {
+      "name": "barcolor",
+      "type": "string"
+    },
+    {
+      "name": "backgroundcolor",
+      "type": "string"
+    },
+    {
+      "name": "bordercolor",
+      "type": "string"
+    },
+    {
+      "name": "textcolor",
+      "type": "string"
+    },
+    {
+      "name": "addontextxoffset",
+      "type": "number"
+    },
+    {
+      "name": "addontextyoffset",
+      "type": "number"
+    },
+    {
+      "name": "addontextfont",
+      "type": "string"
+    },
+    {
+      "name": "addontextsize",
+      "type": "number"
+    },
+    {
+      "name": "guardwhitespace",
+      "type": "boolean"
+    },
+    {
+      "name": "guardwidth",
+      "type": "number"
+    },
+    {
+      "name": "guardheight",
+      "type": "number"
+    },
+    {
+      "name": "guardleftpos",
+      "type": "number"
+    },
+    {
+      "name": "guardrightpos",
+      "type": "number"
+    },
+    {
+      "name": "guardleftypos",
+      "type": "number"
+    },
+    {
+      "name": "guardrightypos",
+      "type": "number"
+    },
+    {
+      "name": "scaleX",
+      "type": "number"
+    },
+    {
+      "name": "scaleY",
+      "type": "number"
+    },
+    {
+      "name": "scale",
+      "type": "number"
+    },
+    {
+      "name": "rotate",
+      "type": "enum",
+      "values": [
+        "N",
+        "R",
+        "L",
+        "I"
+      ]
+    },
+    {
+      "name": "paddingwidth",
+      "type": "number"
+    },
+    {
+      "name": "paddingheight",
+      "type": "number"
+    },
+    {
+      "name": "paddingleft",
+      "type": "number"
+    },
+    {
+      "name": "paddingright",
+      "type": "number"
+    },
+    {
+      "name": "paddingtop",
+      "type": "number"
+    },
+    {
+      "name": "paddingbottom",
+      "type": "number"
+    },
+    {
+      "name": "monochrome",
+      "type": "boolean"
+    },
+    {
+      "name": "sizelimit",
+      "type": "number"
+    }
+  ],
+  "sizingOptions": [
+    {
+      "name": "propspec",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "loosespec",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "strictspec",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "mag",
+      "type": "number",
+      "default": 1
+    },
+    {
+      "name": "xdim",
+      "type": "number",
+      "default": -1
+    },
+    {
+      "name": "ast",
+      "type": "string",
+      "default": "default"
+    },
+    {
+      "name": "xmin",
+      "type": "string"
+    },
+    {
+      "name": "modunit",
+      "type": "number",
+      "default": 1
+    },
+    {
+      "name": "xnom",
+      "type": "number",
+      "default": -1
+    },
+    {
+      "name": "xmax",
+      "type": "number",
+      "default": -1
+    }
+  ],
+  "symbologyOptions": {
+    "auspost": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "custinfoenc",
+        "type": "string",
+        "default": "character"
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "azteccode": [
+      {
+        "name": "format",
+        "type": "string",
+        "default": "full",
+        "description": "full, compact or rune"
+      },
+      {
+        "name": "readerinit",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "layers",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "eclevel",
+        "type": "number",
+        "default": 23
+      },
+      {
+        "name": "ecaddchars",
+        "type": "number",
+        "default": 3
+      },
+      {
+        "name": "raw",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "bc412": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "includestartstop",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "semi",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "channelcode": [
+      {
+        "name": "shortfinder",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "codablockf": [
+      {
+        "name": "rows",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "columns",
+        "type": "number",
+        "default": 8
+      },
+      {
+        "name": "rowheight",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "sepheight",
+        "type": "number",
+        "default": 1
+      }
+    ],
+    "code11": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "code128": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "raw",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "newencoder",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "suppressc",
+        "type": "boolean",
+        "default": false,
+        "description": "Suppress code set C"
+      },
+      {
+        "name": "unlatchextbeforec",
+        "type": "boolean",
+        "default": false,
+        "description": "Suppress extended ASCII with code set C"
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "code16k": [
+      {
+        "name": "sam",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "rows",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "rowheight",
+        "type": "number",
+        "default": 8
+      },
+      {
+        "name": "sepheight",
+        "type": "number",
+        "default": 1
+      },
+      {
+        "name": "raw",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "code2of5": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "default": "industrial"
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "code32": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      }
+    ],
+    "code39": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "hidestars",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "code39ext": [
+      {
+        "name": "hidestars",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "code49": [
+      {
+        "name": "sam",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "append",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "rows",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "rowheight",
+        "type": "number",
+        "default": 8
+      },
+      {
+        "name": "sepheight",
+        "type": "number",
+        "default": 1
+      }
+    ],
+    "code93": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "codeone": [
+      {
+        "name": "version",
+        "type": "string"
+      }
+    ],
+    "d3aqr": [
+      {
+        "name": "category",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hostratio",
+        "type": "number",
+        "default": 2
+      }
+    ],
+    "daft": [
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarexpanded": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "default": "expanded"
+      },
+      {
+        "name": "segments",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "linkage",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "barxmult",
+        "type": "number",
+        "default": 34
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarexpandedcomposite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarexpandedstacked": [
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarexpandedstackedcomposite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarlimited": [
+      {
+        "name": "linkage",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarlimitedcomposite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databaromni": [
+      {
+        "name": "linkage",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "default": "omni"
+      },
+      {
+        "name": "barxmult",
+        "type": "number",
+        "default": 33
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databaromnicomposite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarstacked": [
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarstackedcomposite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarstackedomni": [
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databarstackedomnicomposite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databartruncated": [
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "databartruncatedcomposite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "datamatrix": [
+      {
+        "name": "columns",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "rows",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "description": "square or rectangle"
+      },
+      {
+        "name": "version",
+        "type": "string"
+      },
+      {
+        "name": "c40headerlength",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "raw",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "dmre",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "dotcode": [
+      {
+        "name": "rows",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "columns",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "ratio",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "raw",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "fast",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "mask",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "ean13": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": -7.75
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -5.25
+      },
+      {
+        "name": "guarddescent",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "addondescent",
+        "type": "string",
+        "description": "realtype sentinel: defaults to guarddescent"
+      },
+      {
+        "name": "addongap",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "ean13composite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "ean14": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      }
+    ],
+    "ean2": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 3.25
+      },
+      {
+        "name": "text1yoffset",
+        "type": "string",
+        "description": "sentinel realtype"
+      },
+      {
+        "name": "addondescent",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "ean5": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 3.25
+      },
+      {
+        "name": "text1yoffset",
+        "type": "string",
+        "description": "realtype sentinel"
+      },
+      {
+        "name": "addondescent",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "ean8": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 7.25
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -5.25
+      },
+      {
+        "name": "guarddescent",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "addondescent",
+        "type": "string",
+        "description": "realtype sentinel: defaults to guarddescent"
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "permitaddon",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "addongap",
+        "type": "number",
+        "default": 12
+      }
+    ],
+    "ean8composite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "flattermarken": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "gs1datamatrix": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "gssep",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "gs1datamatrixrectangular": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "gssep",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "gs1dldatamatrix": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      }
+    ],
+    "gs1dlqrcode": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      }
+    ],
+    "gs1dotcode": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      }
+    ],
+    "gs1northamericancoupon": [
+      {
+        "name": "text1",
+        "type": "string",
+        "description": "sentinel: user-supplied label content overrides default"
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 9
+      },
+      {
+        "name": "text1xalign",
+        "type": "string"
+      },
+      {
+        "name": "text1yalign",
+        "type": "string"
+      },
+      {
+        "name": "text1xoffset",
+        "type": "string",
+        "description": "sentinel realtype"
+      },
+      {
+        "name": "text1yoffset",
+        "type": "string",
+        "description": "sentinel realtype"
+      },
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      }
+    ],
+    "gs1qrcode": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "hanxin": [
+      {
+        "name": "version",
+        "type": "string",
+        "description": "1-84"
+      },
+      {
+        "name": "eclevel",
+        "type": "string",
+        "default": "L2",
+        "description": "L1, L2, L3 or L4"
+      },
+      {
+        "name": "mask",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "hibcazteccode": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "hibccodablockf": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "hibccode128": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "hibccode39": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "hibcdatamatrix": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "hibcdatamatrixrectangular": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "hibcmicropdf417": [
+      {
+        "name": "columns",
+        "type": "number",
+        "default": 2
+      },
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "hibcpdf417": [
+      {
+        "name": "columns",
+        "type": "number",
+        "default": 2
+      },
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "hibcqrcode": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "identcode": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      }
+    ],
+    "interleaved2of5": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "isbn": [
+      {
+        "name": "text2",
+        "type": "string",
+        "description": "sentinel: user-supplied label content overrides default"
+      },
+      {
+        "name": "text2font",
+        "type": "string"
+      },
+      {
+        "name": "text2size",
+        "type": "number",
+        "default": 9
+      },
+      {
+        "name": "text2xalign",
+        "type": "string",
+        "description": "sentinel: user-supplied alignment opts out of default xoffset"
+      },
+      {
+        "name": "text2xoffset",
+        "type": "string",
+        "description": "sentinel realtype"
+      },
+      {
+        "name": "text2yoffset",
+        "type": "string",
+        "description": "sentinel realtype"
+      },
+      {
+        "name": "addongap",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "legacy",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "ismn": [
+      {
+        "name": "text2",
+        "type": "string",
+        "description": "sentinel: user-supplied label content overrides default"
+      },
+      {
+        "name": "text2font",
+        "type": "string"
+      },
+      {
+        "name": "text2size",
+        "type": "number",
+        "default": 9
+      },
+      {
+        "name": "text2xalign",
+        "type": "string",
+        "description": "sentinel: user-supplied alignment opts out of default xoffset"
+      },
+      {
+        "name": "text2xoffset",
+        "type": "string",
+        "description": "sentinel realtype"
+      },
+      {
+        "name": "text2yoffset",
+        "type": "string",
+        "description": "sentinel realtype"
+      },
+      {
+        "name": "addongap",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "legacy",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "issn": [
+      {
+        "name": "text2",
+        "type": "string",
+        "description": "sentinel: user-supplied label content overrides default"
+      },
+      {
+        "name": "text2font",
+        "type": "string"
+      },
+      {
+        "name": "text2size",
+        "type": "number",
+        "default": 9
+      },
+      {
+        "name": "text2xalign",
+        "type": "string",
+        "description": "sentinel: user-supplied alignment opts out of default xoffset"
+      },
+      {
+        "name": "text2xoffset",
+        "type": "string",
+        "description": "sentinel realtype"
+      },
+      {
+        "name": "text2yoffset",
+        "type": "string",
+        "description": "sentinel realtype"
+      },
+      {
+        "name": "addongap",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "itf14": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -3.5
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "japanpost": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "kix": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "leitcode": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      }
+    ],
+    "mailmark": [
+      {
+        "name": "type",
+        "type": "string",
+        "description": "7, 9 or 29"
+      }
+    ],
+    "maxicode": [
+      {
+        "name": "mode",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "sam",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "legacyencoder",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "micropdf417": [
+      {
+        "name": "version",
+        "type": "string"
+      },
+      {
+        "name": "columns",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "rows",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "rowmult",
+        "type": "number",
+        "default": 2
+      },
+      {
+        "name": "cca",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "ccb",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "raw",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "msi": [
+      {
+        "name": "checktype",
+        "type": "string"
+      },
+      {
+        "name": "badmod11",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "onecode": [
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "pdf417": [
+      {
+        "name": "compact",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "eclevel",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "fixedeclevel",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "columns",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "rows",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "rowmult",
+        "type": "number",
+        "default": 3
+      },
+      {
+        "name": "ccc",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "raw",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "pharmacode": [
+      {
+        "name": "nwidth",
+        "type": "number",
+        "default": 1
+      },
+      {
+        "name": "wwidth",
+        "type": "number",
+        "default": 3
+      },
+      {
+        "name": "swidth",
+        "type": "number",
+        "default": 2
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "pharmacode2": [
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "planet": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "plessey": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "unidirectional",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "posicode": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "encoding",
+        "type": "string",
+        "default": "auto"
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "default": "a"
+      },
+      {
+        "name": "checkoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "raw",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "postnet": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "pzn": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "pzn8",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "qrcode": [
+      {
+        "name": "format",
+        "type": "string",
+        "description": "full or micro. rMQR symbols are specified using version"
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "description": "1-40 or M1-M4 or R7x43, etc"
+      },
+      {
+        "name": "eclevel",
+        "type": "string",
+        "description": "full: L, M, Q, H; micro: L, M, Q; rmqr: M, H"
+      },
+      {
+        "name": "fixedeclevel",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "mask",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "suppresskanjimode",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "rationalizedCodabar": [
+      {
+        "name": "altstartstop",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "raw": [
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "royalmail": [
+      {
+        "name": "validatecheck",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "sscc18": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      }
+    ],
+    "symbol": [
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "telepen": [
+      {
+        "name": "numeric",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -7
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "ultracode": [
+      {
+        "name": "eclevel",
+        "type": "string",
+        "default": "EC2",
+        "description": "EC1-EC5, and EC0 for rev 1"
+      },
+      {
+        "name": "start",
+        "type": "number",
+        "default": 257,
+        "description": "8-bit ISO-8859-1, until we write high-level encoders"
+      },
+      {
+        "name": "link1",
+        "type": "number",
+        "default": 0
+      },
+      {
+        "name": "raw",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "rev",
+        "type": "number",
+        "default": 2,
+        "description": "Ultracode specification revision"
+      }
+    ],
+    "upca": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": -5.75
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -5.25
+      },
+      {
+        "name": "guarddescent",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "addondescent",
+        "type": "string",
+        "description": "realtype sentinel: defaults to guarddescent"
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "addongap",
+        "type": "number",
+        "default": 12
+      }
+    ],
+    "upcacomposite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ],
+    "upce": [
+      {
+        "name": "text1font",
+        "type": "string"
+      },
+      {
+        "name": "text1size",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "text1xoffset",
+        "type": "number",
+        "default": -5.75
+      },
+      {
+        "name": "text1yoffset",
+        "type": "number",
+        "default": -5.25
+      },
+      {
+        "name": "guarddescent",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "addondescent",
+        "type": "string",
+        "description": "realtype sentinel: defaults to guarddescent"
+      },
+      {
+        "name": "hdim",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      },
+      {
+        "name": "addongap",
+        "type": "number",
+        "default": 12
+      }
+    ],
+    "upcecomposite": [
+      {
+        "name": "dontlint",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "lintreqs",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "hnom",
+        "type": "number",
+        "default": -1
+      }
+    ]
+  }
+}
