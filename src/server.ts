@@ -5,6 +5,26 @@ import { encodeQrTerminal } from "./tools/asciiQr.js";
 import { decodeBarcode } from "./tools/decode.js";
 import { listSymbologies } from "./tools/symbologies.js";
 import { listSymbologyOptions } from "./tools/symbologyOptions.js";
+import { verifyBarcode } from "./tools/verify.js";
+
+/** Shared input shape for the bwip-js encode path (encode_barcode + verify). */
+const encodeInputSchema = {
+  bcid: z.string().describe('Symbology id, e.g. "qrcode", "code128", "pdf417".'),
+  text: z.string().describe("Data to encode."),
+  scale: z.number().optional(),
+  height: z.number().optional(),
+  width: z.number().optional(),
+  rotate: z.enum(["N", "R", "L", "I"]).optional(),
+  includetext: z.boolean().optional(),
+  textsize: z.number().optional(),
+  backgroundcolor: z.string().optional(),
+  barcolor: z.string().optional(),
+  padding: z.number().optional(),
+  options: z
+    .record(z.union([z.string(), z.number(), z.boolean()]))
+    .optional()
+    .describe("Freeform symbology-specific options, forwarded to bwip-js."),
+};
 
 export const SERVER_NAME = "barcoding-mcp";
 export const SERVER_VERSION = "0.0.1";
@@ -29,23 +49,7 @@ export function createServer(): McpServer {
         "Render a barcode (100+ symbologies via bwip-js). Provide bcid + text, " +
         "typed common options, and an optional freeform `options` bag for " +
         "symbology-specific keys. Returns a PNG image.",
-      inputSchema: {
-        bcid: z.string().describe('Symbology id, e.g. "qrcode", "code128", "pdf417".'),
-        text: z.string().describe("Data to encode."),
-        scale: z.number().optional(),
-        height: z.number().optional(),
-        width: z.number().optional(),
-        rotate: z.enum(["N", "R", "L", "I"]).optional(),
-        includetext: z.boolean().optional(),
-        textsize: z.number().optional(),
-        backgroundcolor: z.string().optional(),
-        barcolor: z.string().optional(),
-        padding: z.number().optional(),
-        options: z
-          .record(z.union([z.string(), z.number(), z.boolean()]))
-          .optional()
-          .describe("Freeform symbology-specific options, forwarded to bwip-js."),
-      },
+      inputSchema: encodeInputSchema,
     },
     async (args) => {
       const png = await encodeBarcode(args);
@@ -153,6 +157,27 @@ export function createServer(): McpServer {
       }
       return {
         content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+      };
+    },
+  );
+
+  // --- verify_barcode: encode -> decode its own render -> assert round-trip -
+  server.registerTool(
+    "verify_barcode",
+    {
+      title: "Verify barcode",
+      description:
+        "Encode a barcode and decode its own render to prove the payload " +
+        "round-trips (i.e. it actually scans). Takes the same input as " +
+        "encode_barcode. Only meaningful where the symbology is in the decode " +
+        "set — encode-only symbologies can render fine yet never round-trip.",
+      inputSchema: encodeInputSchema,
+    },
+    async (args) => {
+      const result = await verifyBarcode(args);
+      return {
+        content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+        isError: !result.roundTrips,
       };
     },
   );

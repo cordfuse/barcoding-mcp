@@ -71,7 +71,7 @@ point picks the transport. One code path for tools, two for I/O.
 | `decode_barcode` | Read barcodes from an image (bytes/base64/path/URL). Returns text + symbology + position for each detected code. |
 | `list_symbologies` | List supported symbologies, flagged `encode` / `decode` / `both`. Makes the asymmetry legible to the agent. |
 | `list_symbology_options` | Given a `bcid`, return valid encode option names + types + descriptions. **This is what makes the 100-symbology option surface actually drivable.** |
-| `verify_barcode` *(stretch)* | Encode → decode the render → assert the payload round-trips. Self-verifying label QA. Only valid where symbology is in the decode set. |
+| `verify_barcode` | Encode → decode the render → assert the payload round-trips. Self-verifying label QA. Only valid where symbology is in the decode set. |
 
 ### 4.1 Schema design — the options problem
 
@@ -135,9 +135,11 @@ build, served by `list_symbology_options`. Regenerate on bwip-js bump with
 - ~~`list_symbology_options(bcid)`.~~ Shipped, segments specific/common/sizing.
 
 ### Phase 4 — Self-verify + polish
-- `verify_barcode` round-trip (overlap set only).
-- README with the honest funnel table, examples, both transport setups.
-- CI: build + test on Node LTS.
+- ~~`verify_barcode` round-trip (overlap set only).~~ Shipped: encode -> decode
+  own render -> assert. Decodable symbologies round-trip; encode-only ones
+  report `roundTrips:false` with an honest "expected, outside decode set" note.
+- README with the honest funnel table, examples, both transport setups. [TODO]
+- CI: build + test on Node LTS. [TODO]
 
 ### Phase 5 — Publish
 - `@cordfuse/barcoding-mcp` on npm (tag-to-npm CI pattern, org NPM_TOKEN
