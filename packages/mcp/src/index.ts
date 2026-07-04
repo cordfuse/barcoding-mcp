@@ -7,7 +7,9 @@ interface CliOptions {
 }
 
 function parseArgs(argv: string[]): CliOptions {
-  const opts: CliOptions = { http: false, port: 3900 };
+  // PORT env is the container-friendly default; --port overrides it.
+  const envPort = process.env.PORT ? Number(process.env.PORT) : 3900;
+  const opts: CliOptions = { http: false, port: envPort };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--http") opts.http = true;
@@ -42,6 +44,13 @@ async function runHttp(port: number): Promise<void> {
   const transports = new Map<string, Transport>();
 
   const httpServer = createHttpServer(async (req, res) => {
+    // Liveness probe for container healthchecks / load balancers.
+    if (req.method === "GET" && req.url === "/health") {
+      res.writeHead(200, { "content-type": "application/json" }).end(
+        JSON.stringify({ status: "ok", server: "barcoding-mcp" }),
+      );
+      return;
+    }
     if (!req.url?.startsWith("/mcp")) {
       res.writeHead(404).end();
       return;

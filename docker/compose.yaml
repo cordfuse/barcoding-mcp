@@ -4,6 +4,20 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     image: barcoding-mcp
+    container_name: barcoding-mcp
+    environment:
+      PORT: "3900"
     ports:
       - "3900:3900"
     restart: unless-stopped
+    healthcheck:
+      # node is present in the runtime image; no curl/wget needed.
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://localhost:3900/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

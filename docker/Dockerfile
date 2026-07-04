@@ -15,9 +15,11 @@ RUN npm run build -w @cordfuse/barcoding-mcp
 # ---- runtime stage --------------------------------------------------------
 FROM node:22-slim AS runtime
 ENV NODE_ENV=production
+ENV PORT=3900
 WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/packages/mcp/package.json ./packages/mcp/package.json
 COPY --from=build /app/packages/mcp/dist ./packages/mcp/dist
 EXPOSE 3900
-CMD ["node", "packages/mcp/dist/index.js", "--http", "--port", "3900"]
+# PORT env (settable via compose) selects the listen port; --port would override.
+CMD ["node", "packages/mcp/dist/index.js", "--http"]
