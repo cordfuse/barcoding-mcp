@@ -40,6 +40,10 @@ fails). The tool descriptions must state this precisely.
 - **Decode:** [`zxing-wasm`](https://github.com/Sec-ant/zxing-wasm) — WASM, MIT,
   ES/CJS + types, runs on Node. Full common 1D + 2D (QR, Micro QR, DataMatrix,
   Aztec, PDF417, MaxiCode, Code128/39/93, EAN/UPC, ITF, Codabar, DataBar).
+- **Terminal QR:** [`qrcode`](https://github.com/soldair/node-qrcode) — pure JS,
+  MIT, types included. `toString(data, { type: 'terminal', small: true })`
+  renders a QR from Unicode block characters — a **text** output that needs no
+  image channel.
 - **MCP SDK:** `@modelcontextprotocol/sdk` (TypeScript).
 - **Language:** TypeScript, compiled with `tsc` (no experimental node flags).
 - **Image I/O:** bwip-js renders PNG/SVG; decode accepts image bytes / base64 /
@@ -63,6 +67,7 @@ point picks the transport. One code path for tools, two for I/O.
 | Tool | Purpose |
 |------|---------|
 | `encode_barcode` | Render a barcode. `bcid` + typed common options + freeform `options` bag. Returns image (base64 PNG and/or SVG). |
+| `encode_qr_terminal` | Encode data to an **ASCII / Unicode-block QR** for direct terminal display. Text output, no image channel. QR-only. Options: `small`, `errorCorrectionLevel`, invert. |
 | `decode_barcode` | Read barcodes from an image (bytes/base64/path/URL). Returns text + symbology + position for each detected code. |
 | `list_symbologies` | List supported symbologies, flagged `encode` / `decode` / `both`. Makes the asymmetry legible to the agent. |
 | `list_symbology_options` | Given a `bcid`, return valid encode option names + types + descriptions. **This is what makes the 100-symbology option surface actually drivable.** |
