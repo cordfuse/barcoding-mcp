@@ -1,6 +1,6 @@
 {
   "name": "@cordfuse/barcoding-mcp",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "MCP server: encode 100+ barcode symbologies (bwip-js), decode common 1D/2D (zxing-wasm), ASCII/terminal QR (qrcode). Zero native deps. stdio + streamable HTTP.",
   "license": "MIT",
   "type": "module",
