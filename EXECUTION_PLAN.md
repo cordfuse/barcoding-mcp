@@ -122,9 +122,12 @@ build, served by `list_symbology_options`. Regenerate on bwip-js bump with
 - `encode_barcode` (bwip-js, hybrid schema) + `decode_barcode` (zxing-wasm).
 - `list_symbologies` with encode/decode/both flags.
 
-### Phase 2 — streamable HTTP transport
-- `--http` flag, `StreamableHTTPServerTransport`, minimal listener, `--port`.
-- Verify identical tool behavior across both transports.
+### Phase 2 — streamable HTTP transport [DONE]
+- `--http [--port N]`, `StreamableHTTPServerTransport`, **stateful sessions**
+  (initialize mints a `mcp-session-id`; later requests route back to the same
+  server+transport; evict on close).
+- Verified with a real `StreamableHTTPClient`: initialize -> tools/list ->
+  encode_qr_terminal + list_symbology_options + encode_barcode -> clean close.
 
 ### Phase 3 — Option discoverability [DONE]
 - ~~Build/ship the BWIPP option catalog.~~ `scripts/gen-options.mjs` →
