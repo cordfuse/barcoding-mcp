@@ -8,6 +8,8 @@ import { encodeQrTerminal } from "../dist/tools/asciiQr.js";
 import { verifyBarcode } from "../dist/tools/verify.js";
 import { listSymbologyOptions, allBcids } from "../dist/tools/symbologyOptions.js";
 import { parseGs1 } from "../dist/tools/gs1.js";
+import { decodePdf } from "../dist/tools/decodePdf.js";
+import { PDFDocument } from "pdf-lib";
 
 const hasAnsi = (s) => /\x1b\[/.test(s);
 
@@ -62,6 +64,28 @@ test("decode_batch: multiple images, per-item error isolation", async () => {
   assert.equal(res[0].label, "a.png");
   assert.equal(res[1].barcodes[0].text, "BATCH-B");
   assert.ok(res[2].error && !res[2].barcodes);
+});
+
+test("decode_pdf: rasterize pages and pull barcodes with page numbers", async () => {
+  // page 1: QR, page 2: Code128 — each drawn fully within a roomy page.
+  const qr = await encodeBarcode({ bcid: "qrcode", text: "PDF-P1", scale: 6, padding: 4 });
+  const c128 = await encodeBarcode({ bcid: "code128", text: "PDF-P2", scale: 3, includetext: true, padding: 6 });
+  const pdf = await PDFDocument.create();
+  for (const png of [qr, c128]) {
+    const img = await pdf.embedPng(png);
+    const page = pdf.addPage([500, 500]);
+    const w = 360, h = (img.height / img.width) * w;
+    page.drawImage(img, { x: 70, y: 250 - h / 2, width: w, height: h });
+  }
+  const base64 = Buffer.from(await pdf.save()).toString("base64");
+
+  const res = await decodePdf({ base64 });
+  assert.equal(res.pageCount, 2);
+  assert.equal(res.totalBarcodes, 2);
+  const p1 = res.results.find((r) => r.page === 1);
+  const p2 = res.results.find((r) => r.page === 2);
+  assert.equal(p1.barcodes[0].text, "PDF-P1");
+  assert.equal(p2.barcodes[0].text, "PDF-P2");
 });
 
 test("gs1_parse: bracketed HRI form -> structured AIs", () => {

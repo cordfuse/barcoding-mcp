@@ -3,6 +3,7 @@ import { z } from "zod";
 import { encodeBarcode } from "./tools/encode.js";
 import { encodeQrTerminal } from "./tools/asciiQr.js";
 import { decodeBarcode, decodeBatch } from "./tools/decode.js";
+import { decodePdf } from "./tools/decodePdf.js";
 import { listSymbologies } from "./tools/symbologies.js";
 import { listSymbologyOptions } from "./tools/symbologyOptions.js";
 import { verifyBarcode } from "./tools/verify.js";
@@ -139,6 +140,30 @@ export function createServer(): McpServer {
     async ({ items }) => ({
       content: [
         { type: "text", text: JSON.stringify(await decodeBatch(items), null, 2) },
+      ],
+    }),
+  );
+
+  // --- decode_pdf: rasterize PDF pages and pull every barcode --------------
+  server.registerTool(
+    "decode_pdf",
+    {
+      title: "Decode barcodes from a PDF",
+      description:
+        "Rasterize each page of a PDF (via mupdf, pure WASM) and decode every " +
+        "1D/2D barcode on it, tagged with its page number. Provide one of " +
+        "base64/path/url. dpi defaults to 300 (raise for dense/tiny codes).",
+      inputSchema: {
+        base64: z.string().optional().describe("Base64-encoded PDF bytes."),
+        path: z.string().optional().describe("Local filesystem path to a PDF."),
+        url: z.string().optional().describe("URL to fetch a PDF from."),
+        dpi: z.number().optional().describe("Render resolution (default 300)."),
+        maxSymbolsPerPage: z.number().optional(),
+      },
+    },
+    async (args) => ({
+      content: [
+        { type: "text", text: JSON.stringify(await decodePdf(args), null, 2) },
       ],
     }),
   );

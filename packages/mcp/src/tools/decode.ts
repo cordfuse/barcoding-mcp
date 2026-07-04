@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import {
   prepareZXingModule,
   readBarcodesFromImageFile,
+  readBarcodesFromImageData,
 } from "zxing-wasm/reader";
 
 export interface DecodeBarcodeArgs {
@@ -83,6 +84,21 @@ export async function decodeBarcode(
     format: r.format,
     valid: r.isValid,
   }));
+}
+
+/** Decode raw RGBA pixels (e.g. a rasterized PDF page) via zxing-wasm. */
+export async function decodeImageData(
+  image: { data: Uint8ClampedArray; width: number; height: number },
+  maxSymbols = 16,
+): Promise<DecodedBarcode[]> {
+  await ensureModule();
+  // zxing's runtime is duck-typed; its TS type is the DOM ImageData (wants
+  // colorSpace). Cast to satisfy the compiler — the extra field is ignored.
+  const results = await readBarcodesFromImageData(image as unknown as ImageData, {
+    tryHarder: true,
+    maxNumberOfSymbols: maxSymbols,
+  });
+  return results.map((r) => ({ text: r.text, format: r.format, valid: r.isValid }));
 }
 
 export interface BatchItem extends DecodeBarcodeArgs {
