@@ -1,0 +1,9 @@
+services:
+  barcoding-mcp:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: barcoding-mcp
+    ports:
+      - "3900:3900"
+    restart: unless-stopped

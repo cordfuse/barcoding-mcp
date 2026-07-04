@@ -30,6 +30,21 @@ the common ones, round-trip-verified where both overlap.* Overclaiming decode is
 the fastest way to erode agent trust (hand it an Australia Post barcode, it
 fails). The tool descriptions must state this precisely.
 
+## 1a. Repository layout (monorepo)
+
+```
+barcoding-mcp/               repo root — private npm workspace, no publish
+  packages/
+    mcp/                     @cordfuse/barcoding-mcp (src/, scripts/, dist/)
+  docker/                    Dockerfile + compose for the --http server
+  package.json               workspaces: ["packages/*"]
+```
+
+`node_modules` hoists to the root; the `import.meta.resolve` lookups (bwip-js,
+zxing wasm) and the option-catalog data dir are hoist-safe. Docker builds from
+the repo root and serves `node packages/mcp/dist/index.js --http` (stdio is
+per-invocation, not containerised).
+
 ## 2. Stack
 
 - **Runtime:** Node (LTS). No Bun — decode WASM + broad tooling, node-native is
