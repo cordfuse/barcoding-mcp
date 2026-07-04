@@ -158,12 +158,14 @@ build, served by `list_symbology_options`. Regenerate on bwip-js bump with
 - ~~CI: build + test on Node LTS.~~ Done: `.github/workflows/ci.yml` (typecheck
   + build + `node:test` smoke suite on Node 20 & 22). Test suite added.
 
-### Phase 5 — Publish [WORKFLOWS READY]
-- `.github/workflows/release.yml` — a `v*` tag publishes npm
-  (`@cordfuse/barcoding-mcp`) + GHCR (`ghcr.io/cordfuse/barcoding-mcp`).
-- **Blocked on:** add this repo to the org `NPM_TOKEN` selected-repo allow-list
-  (GHCR needs no secret — built-in `GITHUB_TOKEN`). Then bump version, tag, push.
-- Remaining: flip repo public. Register the `--http` endpoint in metamcp.
+### Phase 5 — Publish [DONE]
+- `v0.0.1` published: `@cordfuse/barcoding-mcp@0.0.1` on npm +
+  `ghcr.io/cordfuse/barcoding-mcp:0.0.1`/`:latest` on GHCR.
+- Repo is **public** — required because **GitHub Free tier does not deliver
+  org Actions secrets to private repos** (org `NPM_TOKEN` arrived empty while
+  private; public fixed it). Repo added to the `NPM_TOKEN` selected-repo list.
+- Release path: bump version, tag `vX.Y.Z`, push — CI publishes npm + GHCR.
+- Remaining: register the `--http` endpoint in metamcp.
 
 ## 6. Non-goals
 
