@@ -36,6 +36,15 @@ jobs:
 
       - run: npm test -w @cordfuse/barcoding-mcp
 
+      - name: Assert token present
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "::error::NPM_TOKEN is empty in this job (secret not delivered)"; exit 1
+          fi
+          echo "token present, length ${#NODE_AUTH_TOKEN}"
+
       - name: Publish to npm
         run: npm publish -w @cordfuse/barcoding-mcp --access public
         env:
