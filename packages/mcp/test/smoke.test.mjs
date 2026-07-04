@@ -7,6 +7,7 @@ import { decodeBarcode } from "../dist/tools/decode.js";
 import { encodeQrTerminal } from "../dist/tools/asciiQr.js";
 import { verifyBarcode } from "../dist/tools/verify.js";
 import { listSymbologyOptions, allBcids } from "../dist/tools/symbologyOptions.js";
+import { parseGs1 } from "../dist/tools/gs1.js";
 
 const hasAnsi = (s) => /\x1b\[/.test(s);
 
@@ -46,6 +47,29 @@ test("verify_barcode flags encode-only symbologies honestly", async () => {
   const v = await verifyBarcode({ bcid: "royalmail", text: "LE28HS9Z" });
   assert.equal(v.roundTrips, false);
   assert.match(v.note ?? "", /encode-only/);
+});
+
+test("gs1_parse: bracketed HRI form -> structured AIs", () => {
+  const r = parseGs1("(01)09521234543213(15)261231(10)ABC123(21)SN-987");
+  assert.equal(r.elements.length, 4);
+  assert.deepEqual(
+    r.elements.map((e) => [e.ai, e.value]),
+    [["01", "09521234543213"], ["15", "261231"], ["10", "ABC123"], ["21", "SN-987"]],
+  );
+  assert.equal(r.elements[0].title, "GTIN");
+});
+
+test("gs1_parse: raw GS-separated form + measurement decimal", () => {
+  const GS = "\x1d";
+  // 01 (fixed 14) + 3103 net weight (6 digits, 3 implied decimals) +
+  // 10 batch (variable, ends at GS) + 21 serial (variable, to end)
+  const raw = "01" + "09521234543213" + "3103" + "001250" + "10" + "LOT9" + GS + "21" + "SER-1";
+  const r = parseGs1(raw);
+  const by = (ai) => r.elements.find((e) => e.ai === ai);
+  assert.equal(by("01").value, "09521234543213");
+  assert.equal(by("3103").numeric, 1.25); // 001250 with 3 implied decimals
+  assert.equal(by("10").value, "LOT9");
+  assert.equal(by("21").value, "SER-1");
 });
 
 test("option catalog: 111 bcids, pdf417 exposes its specific options", async () => {

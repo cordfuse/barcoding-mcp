@@ -6,6 +6,7 @@ import { decodeBarcode } from "./tools/decode.js";
 import { listSymbologies } from "./tools/symbologies.js";
 import { listSymbologyOptions } from "./tools/symbologyOptions.js";
 import { verifyBarcode } from "./tools/verify.js";
+import { parseGs1 } from "./tools/gs1.js";
 
 /** Shared input shape for the bwip-js encode path (encode_barcode + verify). */
 const encodeInputSchema = {
@@ -180,6 +181,28 @@ export function createServer(): McpServer {
         isError: !result.roundTrips,
       };
     },
+  );
+
+  // --- gs1_parse: decoded GS1 string -> structured Application Identifiers --
+  server.registerTool(
+    "gs1_parse",
+    {
+      title: "Parse GS1 element string",
+      description:
+        "Parse a GS1 element string (from decode_barcode on a GS1-128, GS1 " +
+        "DataMatrix, GS1 QR, or GS1 DataBar) into structured Application " +
+        "Identifiers — GTIN (01), dates (11/15/17), batch (10), serial (21), " +
+        "weights/measures (31xx), and more. Accepts both the bracketed HRI " +
+        "form '(01)...(17)...' and the raw FNC1/GS-separated form.",
+      inputSchema: {
+        data: z
+          .string()
+          .describe("The GS1 element string, e.g. decode_barcode's text output."),
+      },
+    },
+    async ({ data }) => ({
+      content: [{ type: "text", text: JSON.stringify(parseGs1(data), null, 2) }],
+    }),
   );
 
   return server;
