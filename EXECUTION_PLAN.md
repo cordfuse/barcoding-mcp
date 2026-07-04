@@ -153,12 +153,17 @@ build, served by `list_symbology_options`. Regenerate on bwip-js bump with
 - ~~`verify_barcode` round-trip (overlap set only).~~ Shipped: encode -> decode
   own render -> assert. Decodable symbologies round-trip; encode-only ones
   report `roundTrips:false` with an honest "expected, outside decode set" note.
-- README with the honest funnel table, examples, both transport setups. [TODO]
-- CI: build + test on Node LTS. [TODO]
+- ~~README with the honest funnel table, examples, both transport setups.~~
+  Done: root README + `packages/mcp/README.md` (npm-facing).
+- ~~CI: build + test on Node LTS.~~ Done: `.github/workflows/ci.yml` (typecheck
+  + build + `node:test` smoke suite on Node 20 & 22). Test suite added.
 
-### Phase 5 — Publish
-- `@cordfuse/barcoding-mcp` on npm (tag-to-npm CI pattern, org NPM_TOKEN
-  allow-list). Flip repo public. Register endpoint in metamcp.
+### Phase 5 — Publish [WORKFLOWS READY]
+- `.github/workflows/release.yml` — a `v*` tag publishes npm
+  (`@cordfuse/barcoding-mcp`) + GHCR (`ghcr.io/cordfuse/barcoding-mcp`).
+- **Blocked on:** add this repo to the org `NPM_TOKEN` selected-repo allow-list
+  (GHCR needs no secret — built-in `GITHUB_TOKEN`). Then bump version, tag, push.
+- Remaining: flip repo public. Register the `--http` endpoint in metamcp.
 
 ## 6. Non-goals
 

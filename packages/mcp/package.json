@@ -4,14 +4,40 @@
   "description": "MCP server: encode 100+ barcode symbologies (bwip-js), decode common 1D/2D (zxing-wasm), ASCII/terminal QR (qrcode). Zero native deps. stdio + streamable HTTP.",
   "license": "MIT",
   "type": "module",
+  "author": "Cordfuse",
+  "homepage": "https://github.com/cordfuse/barcoding-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cordfuse/barcoding-mcp.git",
+    "directory": "packages/mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/cordfuse/barcoding-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "barcode",
+    "qrcode",
+    "datamatrix",
+    "pdf417",
+    "bwip-js",
+    "zxing",
+    "encode",
+    "decode"
+  ],
   "bin": {
     "barcoding-mcp": "dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "gen:options": "node scripts/gen-options.mjs",
@@ -19,7 +45,9 @@
     "start": "node dist/index.js",
     "start:http": "node dist/index.js --http",
     "dev": "tsx src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"test/*.test.mjs\"",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
