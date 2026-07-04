@@ -24,6 +24,9 @@ Plus an ASCII/Unicode **terminal QR** for output that needs no image channel.
 | `encode_barcode` | Render a barcode (bcid + text + typed common options + freeform `options` bag). Returns a PNG. |
 | `encode_qr_terminal` | Encode data to a block-character QR. `style: unicode` (default, safe in codeblocks/logs) or `ansi` (live TTY). |
 | `decode_barcode` | Detect + decode 1D/2D barcodes from an image (`base64` / `path` / `url`; PNG or JPEG). |
+| `decode_batch` | Decode many images in one call; per-item results, isolated errors. |
+| `decode_pdf` | Rasterize a PDF (mupdf WASM) and pull every barcode, tagged with page number. |
+| `gs1_parse` | Parse a decoded GS1 string into structured Application Identifiers (GTIN, dates, batch, serial, weights…). |
 | `verify_barcode` | Encode → decode the render → assert the payload round-trips. Self-verifying label QA. |
 | `list_symbologies` | Supported symbologies flagged encode / decode / both. |
 | `list_symbology_options` | Valid encode options for a bcid, segmented `specific` / `common` / `sizing`. Discover the `options` bag's keys before encoding. |

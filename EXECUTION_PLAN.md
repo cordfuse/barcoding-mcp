@@ -84,6 +84,9 @@ point picks the transport. One code path for tools, two for I/O.
 | `encode_barcode` | Render a barcode. `bcid` + typed common options + freeform `options` bag. Returns a PNG image. |
 | `encode_qr_terminal` | Encode data to an **ASCII / Unicode-block QR** for direct terminal display. Text output, no image channel. QR-only. Options: `style` (`unicode`\|`ansi`), `small`, `errorCorrectionLevel`. |
 | `decode_barcode` | Read barcodes from an image (bytes/base64/path/URL). Returns text + symbology + position for each detected code. |
+| `decode_batch` | Decode many images in one call; per-item results, isolated errors. *(post-v0.0.1)* |
+| `decode_pdf` | Rasterize a PDF via mupdf (WASM) and pull every barcode, tagged with page number. *(post-v0.0.1)* |
+| `gs1_parse` | Decoded GS1 string → structured Application Identifiers (GTIN/dates/batch/serial/measures). *(post-v0.0.1)* |
 | `list_symbologies` | List supported symbologies, flagged `encode` / `decode` / `both`. Makes the asymmetry legible to the agent. |
 | `list_symbology_options` | Given a `bcid`, return valid encode option names + types + descriptions. **This is what makes the 100-symbology option surface actually drivable.** |
 | `verify_barcode` | Encode → decode the render → assert the payload round-trips. Self-verifying label QA. Only valid where symbology is in the decode set. |
@@ -184,6 +187,17 @@ build, served by `list_symbology_options`. Regenerate on bwip-js bump with
 2. Decode input — **base64 / path / url all accepted**; PNG + JPEG decode in-wasm.
 3. `verify_barcode` — **shipped in v0.0.1** (overlap set; honest note otherwise).
 4. Package scope — **`@cordfuse/barcoding-mcp`** (published).
+
+## 7a. Moat-widening features (post-v0.0.1, on `main`)
+
+Three tools none of the QR-only competitors have, all zero-native-deps:
+- **`decode_pdf`** — mupdf (WASM) rasterizes each page → zxing decodes → barcodes
+  tagged by page. The headline. 300 dpi default.
+- **`decode_batch`** — many images in one call, per-item error isolation.
+- **`gs1_parse`** — decoded GS1 → structured AIs, pairs with `decode_barcode`.
+
+Deps added: `mupdf` (runtime, WASM), `pdf-lib` (test-only devDependency).
+Ready for a **0.1.0** release when the live image is redeployed.
 
 ## 8. Remaining / follow-ups
 
