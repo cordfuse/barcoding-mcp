@@ -84,3 +84,29 @@ export async function decodeBarcode(
     valid: r.isValid,
   }));
 }
+
+export interface BatchItem extends DecodeBarcodeArgs {
+  /** Optional caller label echoed back in the result (e.g. a filename). */
+  label?: string;
+}
+
+export interface BatchResult {
+  index: number;
+  label?: string;
+  barcodes?: DecodedBarcode[];
+  error?: string;
+}
+
+/** Decode many images in one call; per-item errors are isolated, not fatal. */
+export async function decodeBatch(items: BatchItem[]): Promise<BatchResult[]> {
+  return Promise.all(
+    items.map(async (item, index): Promise<BatchResult> => {
+      const base: BatchResult = { index, label: item.label };
+      try {
+        return { ...base, barcodes: await decodeBarcode(item) };
+      } catch (e) {
+        return { ...base, error: String(e instanceof Error ? e.message : e) };
+      }
+    }),
+  );
+}

@@ -2,7 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { encodeBarcode } from "./tools/encode.js";
 import { encodeQrTerminal } from "./tools/asciiQr.js";
-import { decodeBarcode } from "./tools/decode.js";
+import { decodeBarcode, decodeBatch } from "./tools/decode.js";
 import { listSymbologies } from "./tools/symbologies.js";
 import { listSymbologyOptions } from "./tools/symbologyOptions.js";
 import { verifyBarcode } from "./tools/verify.js";
@@ -111,6 +111,36 @@ export function createServer(): McpServer {
         content: [{ type: "text", text: JSON.stringify(results, null, 2) }],
       };
     },
+  );
+
+  // --- decode_batch: many images in one call -------------------------------
+  server.registerTool(
+    "decode_batch",
+    {
+      title: "Decode a batch of images",
+      description:
+        "Decode many images in one call. Each item takes base64/path/url (like " +
+        "decode_barcode) plus an optional label; results come back per item " +
+        "with all detected barcodes. Per-item errors are isolated, not fatal.",
+      inputSchema: {
+        items: z
+          .array(
+            z.object({
+              base64: z.string().optional(),
+              path: z.string().optional(),
+              url: z.string().optional(),
+              label: z.string().optional().describe("Echoed back (e.g. a filename)."),
+              maxSymbols: z.number().optional(),
+            }),
+          )
+          .describe("Images to decode; each needs one of base64, path, or url."),
+      },
+    },
+    async ({ items }) => ({
+      content: [
+        { type: "text", text: JSON.stringify(await decodeBatch(items), null, 2) },
+      ],
+    }),
   );
 
   // --- list_symbologies: capability table ----------------------------------

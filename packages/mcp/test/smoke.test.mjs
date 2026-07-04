@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { encodeBarcode } from "../dist/tools/encode.js";
-import { decodeBarcode } from "../dist/tools/decode.js";
+import { decodeBarcode, decodeBatch } from "../dist/tools/decode.js";
 import { encodeQrTerminal } from "../dist/tools/asciiQr.js";
 import { verifyBarcode } from "../dist/tools/verify.js";
 import { listSymbologyOptions, allBcids } from "../dist/tools/symbologyOptions.js";
@@ -47,6 +47,21 @@ test("verify_barcode flags encode-only symbologies honestly", async () => {
   const v = await verifyBarcode({ bcid: "royalmail", text: "LE28HS9Z" });
   assert.equal(v.roundTrips, false);
   assert.match(v.note ?? "", /encode-only/);
+});
+
+test("decode_batch: multiple images, per-item error isolation", async () => {
+  const a = (await encodeBarcode({ bcid: "qrcode", text: "BATCH-A", padding: 4 })).toString("base64");
+  const b = (await encodeBarcode({ bcid: "code128", text: "BATCH-B" })).toString("base64");
+  const res = await decodeBatch([
+    { base64: a, label: "a.png" },
+    { base64: b, label: "b.png" },
+    { label: "bad" }, // no input -> isolated error, not fatal
+  ]);
+  assert.equal(res.length, 3);
+  assert.equal(res[0].barcodes[0].text, "BATCH-A");
+  assert.equal(res[0].label, "a.png");
+  assert.equal(res[1].barcodes[0].text, "BATCH-B");
+  assert.ok(res[2].error && !res[2].barcodes);
 });
 
 test("gs1_parse: bracketed HRI form -> structured AIs", () => {
