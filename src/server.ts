@@ -63,10 +63,18 @@ export function createServer(): McpServer {
     {
       title: "Encode QR to terminal",
       description:
-        "Encode data to an ASCII / Unicode-block QR for direct terminal " +
-        "display. Pure text output — no image channel required. QR only.",
+        "Encode data to a block-character QR for direct display. Pure text " +
+        "output — no image channel required. QR only. Use style 'unicode' " +
+        "(default) for codeblocks/chat/logs, or 'ansi' for a live terminal.",
       inputSchema: {
         data: z.string().describe("Data to encode into the QR."),
+        style: z
+          .enum(["unicode", "ansi"])
+          .optional()
+          .describe(
+            "'unicode' (default): plain blocks, safe in codeblocks/transcripts. " +
+              "'ansi': coloured blocks, sharp in a TTY but garbles elsewhere.",
+          ),
         small: z.boolean().optional().describe("Half-height blocks (default true)."),
         errorCorrectionLevel: z.enum(["L", "M", "Q", "H"]).optional(),
       },
