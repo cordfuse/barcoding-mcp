@@ -1,6 +1,7 @@
 # barcoding-mcp
 
 [![CI](https://github.com/cordfuse/barcoding-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/cordfuse/barcoding-mcp/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@cordfuse/barcoding-mcp)](https://www.npmjs.com/package/@cordfuse/barcoding-mcp)
 
 An MCP server that **encodes 100+ barcode symbologies** (via `bwip-js`) and
 **decodes all the common 1D/2D formats** (via `zxing-wasm`), with **zero native
@@ -13,7 +14,7 @@ Plus an ASCII/Unicode **terminal QR** for output that needs no image channel.
 | Direction | Library | Coverage |
 |-----------|---------|----------|
 | Encode | [`bwip-js`](https://github.com/metafloor/bwip-js) | **100+** symbologies (full BWIPP) |
-| Decode | [`zxing-wasm`](https://github.com/Sec-ant/zxing-wasm) | **~25** common 1D/2D (QR, DataMatrix, Aztec, PDF417, Code128/39/93, EAN/UPC, ITF, Codabar, DataBar, MaxiCode) |
+| Decode | [`zxing-wasm`](https://github.com/Sec-ant/zxing-wasm) | **~20** common 1D/2D (QR, Micro QR, DataMatrix, Aztec, PDF417, MaxiCode, Code128/39/93, EAN/UPC, ITF, Codabar, DataBar) |
 | Terminal QR | [`qrcode`](https://github.com/soldair/node-qrcode) | block-character QR, pure text |
 
 ## Tools

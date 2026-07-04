@@ -4,7 +4,7 @@
 > common 1D/2D formats**, with **zero native dependencies**. Node runtime,
 > serves over both **stdio** and **streamable HTTP**.
 
-Status: planning · Created 2026-07-04 · Home: `cordfuse/barcoding-mcp` (private → public when ready)
+Status: **shipped v0.0.1** (npm + GHCR, both public) · Created 2026-07-04 · Home: `cordfuse/barcoding-mcp` (public) · Wired into metamcp
 
 ---
 
@@ -23,7 +23,7 @@ the server into a *transport*, not just a utility.
 | Direction | Library | Coverage |
 |-----------|---------|----------|
 | Encode | `bwip-js` (BWIPP port) | **100+** symbologies — widest in the JS ecosystem |
-| Decode | `zxing-wasm` (ZXing-C++ → WASM) | **~20-30** common 1D/2D formats |
+| Decode | `zxing-wasm` (ZXing-C++ → WASM) | **~20** common 1D/2D formats |
 
 We **do not** claim "decode anything." The contract is: *encode 100+, decode all
 the common ones, round-trip-verified where both overlap.* Overclaiming decode is
@@ -33,7 +33,7 @@ fails). The tool descriptions must state this precisely.
 ## 1a. Repository layout (monorepo)
 
 ```
-barcoding-mcp/               repo root — private npm workspace, no publish
+barcoding-mcp/               repo root — unpublished npm workspace (private:true)
   packages/
     mcp/                     @cordfuse/barcoding-mcp (src/, scripts/, dist/)
   docker/                    Dockerfile + compose for the --http server
@@ -81,8 +81,8 @@ point picks the transport. One code path for tools, two for I/O.
 
 | Tool | Purpose |
 |------|---------|
-| `encode_barcode` | Render a barcode. `bcid` + typed common options + freeform `options` bag. Returns image (base64 PNG and/or SVG). |
-| `encode_qr_terminal` | Encode data to an **ASCII / Unicode-block QR** for direct terminal display. Text output, no image channel. QR-only. Options: `small`, `errorCorrectionLevel`, invert. |
+| `encode_barcode` | Render a barcode. `bcid` + typed common options + freeform `options` bag. Returns a PNG image. |
+| `encode_qr_terminal` | Encode data to an **ASCII / Unicode-block QR** for direct terminal display. Text output, no image channel. QR-only. Options: `style` (`unicode`\|`ansi`), `small`, `errorCorrectionLevel`. |
 | `decode_barcode` | Read barcodes from an image (bytes/base64/path/URL). Returns text + symbology + position for each detected code. |
 | `list_symbologies` | List supported symbologies, flagged `encode` / `decode` / `both`. Makes the asymmetry legible to the agent. |
 | `list_symbology_options` | Given a `bcid`, return valid encode option names + types + descriptions. **This is what makes the 100-symbology option surface actually drivable.** |
@@ -124,15 +124,15 @@ build, served by `list_symbology_options`. Regenerate on bwip-js bump with
 
 ## 5. Phases
 
-### Phase 0 — Decode spike (proves the project exists)
-- Prove `zxing-wasm` decodes **DataMatrix + PDF417 + a linear code** from real
-  photos in Node, pure WASM, no native deps. If decode is weak or falls back to
-  native, the whole thesis is at risk — do this first.
-- Confirm bwip-js encode → zxing-wasm decode round-trips for the overlap set.
-- Nail down the symbology-name mapping between the two libs (they don't name
-  formats identically).
+### Phase 0 — Decode spike (proves the project exists) [DONE]
+- ~~Prove `zxing-wasm` decodes DataMatrix + PDF417 + a linear code~~ — verified
+  in Node, pure WASM, no native deps. Two gotchas found + fixed: zxing needs the
+  wasm bytes via `wasmBinary` (Node `fetch` can't load the `file://` .wasm), and
+  bwip-js must render an opaque white background or decoders read all-black.
+- ~~bwip-js encode → zxing-wasm decode round-trips for the overlap set.~~ Done.
+- Later validated on a **real phone photo** (Galaxy S26 JPEG) → Code128 decoded.
 
-### Phase 1 — Core encode/decode over stdio
+### Phase 1 — Core encode/decode over stdio [DONE]
 - MCP server skeleton, `StdioServerTransport`.
 - `encode_barcode` (bwip-js, hybrid schema) + `decode_barcode` (zxing-wasm).
 - `list_symbologies` with encode/decode/both flags.
@@ -149,7 +149,7 @@ build, served by `list_symbology_options`. Regenerate on bwip-js bump with
   `src/data/symbology-options.json` (53 common, 10 sizing, 415 specific).
 - ~~`list_symbology_options(bcid)`.~~ Shipped, segments specific/common/sizing.
 
-### Phase 4 — Self-verify + polish
+### Phase 4 — Self-verify + polish [DONE]
 - ~~`verify_barcode` round-trip (overlap set only).~~ Shipped: encode -> decode
   own render -> assert. Decodable symbologies round-trip; encode-only ones
   report `roundTrips:false` with an honest "expected, outside decode set" note.
@@ -165,7 +165,9 @@ build, served by `list_symbology_options`. Regenerate on bwip-js bump with
   org Actions secrets to private repos** (org `NPM_TOKEN` arrived empty while
   private; public fixed it). Repo added to the `NPM_TOKEN` selected-repo list.
 - Release path: bump version, tag `vX.Y.Z`, push — CI publishes npm + GHCR.
-- Remaining: register the `--http` endpoint in metamcp.
+- ~~Register the `--http` endpoint in metamcp.~~ Done — added as a Streamable
+  HTTP server at `http://barcoding-mcp:3900/mcp` (container on
+  `metamcp_metamcp-network`; verified encode/decode through metamcp).
 
 ## 6. Non-goals
 
@@ -175,13 +177,22 @@ build, served by `list_symbology_options`. Regenerate on bwip-js bump with
 - No per-symbology hand-written schemas for all 100 (freeform bag + discovery
   tool instead).
 
-## 7. Open decisions
+## 7. Decisions (resolved)
 
-1. `list_symbology_options` — passthrough vs generated BWIPP catalog (resolve in
-   Phase 0/3).
-2. Decode input: which forms to accept (bytes / base64 / path / URL — likely all).
-3. Whether `verify_barcode` ships in v1 or is deferred.
-4. Package scope confirmed `@cordfuse/barcoding-mcp` at publish time.
+1. `list_symbology_options` — **generated BWIPP catalog** from bwip-js's shipped
+   sources (not passthrough, not web-scraped).
+2. Decode input — **base64 / path / url all accepted**; PNG + JPEG decode in-wasm.
+3. `verify_barcode` — **shipped in v0.0.1** (overlap set; honest note otherwise).
+4. Package scope — **`@cordfuse/barcoding-mcp`** (published).
+
+## 8. Remaining / follow-ups
+
+- Reproducibility: the metamcp-network container wiring is a manual `docker run`
+  (survives reboots via `--restart unless-stopped`) but isn't in a tracked
+  compose — the repo's `docker/compose.yaml` uses the default network + host
+  port. A compose override would make the metamcp deployment reproducible.
+- Optional: rotate the npm publish token (it was shared in plaintext during
+  first-release debugging).
 
 ---
 
