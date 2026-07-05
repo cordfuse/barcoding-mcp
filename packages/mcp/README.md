@@ -36,7 +36,7 @@ MCP client config (stdio):
 | `decode_pdf` | Rasterize a PDF (mupdf WASM) and pull every barcode, tagged with page number. |
 | `gs1_parse` | Parse a decoded GS1 string into structured Application Identifiers. |
 | `verify_barcode` | Encode → decode the render → assert the payload round-trips. |
-| `list_symbologies` | Supported symbologies flagged encode / decode / both. |
+| `list_symbologies` | All 111 symbologies (full BWIPP encoder set), each flagged `support: encode / decode / both` with a valid `sample` input. |
 | `list_symbology_options` | Valid encode options for a bcid (`specific` / `common` / `sizing`). Call before `encode_barcode` to discover the `options` bag's keys. |
 
 ## Options model

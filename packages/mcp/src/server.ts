@@ -174,8 +174,10 @@ export function createServer(): McpServer {
     {
       title: "List symbologies",
       description:
-        "List supported symbologies flagged encode / decode / both. Makes the " +
-        "encode-wide / decode-narrow asymmetry legible before you encode.",
+        "List every supported symbology (the full bwip-js/BWIPP encoder set), each " +
+        "flagged support: encode | decode | both, with a valid `sample` input you can " +
+        "pass straight to encode_barcode. Makes the encode-wide / decode-narrow " +
+        "asymmetry legible before you encode.",
       inputSchema: {},
     },
     async () => ({
