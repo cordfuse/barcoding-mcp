@@ -1,15 +1,29 @@
+# barcoding-mcp — the streamable-HTTP server that backs the metamcp endpoint.
+#
+# Deploy / update the endpoint (pull the published image, recreate on the
+# metamcp network — this is the whole "update after a release" flow):
+#   docker compose -f docker/compose.yaml pull
+#   docker compose -f docker/compose.yaml up -d
+#
+# Pin a specific version:      BARCODING_TAG=0.2.0 docker compose … up -d
+# Local dev (build from src):  docker compose -f docker/compose.yaml up -d --build
+name: barcoding-mcp
+
 services:
   barcoding-mcp:
+    image: ghcr.io/cordfuse/barcoding-mcp:${BARCODING_TAG:-latest}
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: barcoding-mcp
     container_name: barcoding-mcp
     environment:
       PORT: "3900"
     ports:
-      - "3900:3900"
+      # localhost-only; metamcp reaches this by container name over the shared network.
+      - "127.0.0.1:3900:3900"
     restart: unless-stopped
+    networks:
+      - metamcp
     healthcheck:
       # node is present in the runtime image; no curl/wget needed.
       test:
@@ -21,3 +35,10 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+
+networks:
+  # Created by the metamcp compose project; we attach so the aggregator can
+  # reach us by container name (http://barcoding-mcp:3900/mcp).
+  metamcp:
+    external: true
+    name: metamcp_metamcp-network
