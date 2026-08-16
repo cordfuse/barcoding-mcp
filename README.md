@@ -50,7 +50,7 @@ MCP client config (stdio):
 }
 ```
 
-### Docker / GHCR (streamable HTTP — for remote / metamcp wiring)
+### Docker / GHCR (streamable HTTP — for remote wiring)
 
 ```bash
 docker run -p 3900:3900 ghcr.io/cordfuse/barcoding-mcp:latest
